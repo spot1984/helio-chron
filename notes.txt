@@ -1,7 +1,14 @@
-ToDo
-	Get LED's to light
+﻿ToDo
+	Install Raspian on RPIZW
+	Get the LED Library
+	Modify clock speed
+	Wire LED's and RPI to new PSU
+	Get LED's to light on pi zero
 	Read bitmap and animate rows on LED's
+	Include library in child folder of helio-chron
+	
 
+	
 
 2017-09-17
 	https://learn.adafruit.com/neopixels-on-raspberry-pi/software
@@ -32,3 +39,33 @@ ToDo
 		Composition of 24bit data:
 			G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0
 			Note: Follow the order of GRB to sent data and the high bit sent at first.
+			
+2017-11-24
+	 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq 
+		RPI 3 B: 600000
+	 vcgencmd get_config arm_freq
+		ARM_FREQ=1200
+	
+	https://thisisyetanotherblog.wordpress.com/2017/03/06/neopixels-strip-on-raspberry-pi-zero/comment-page-1/
+	
+	https://www.modmypi.com/blog/how-to-change-the-default-account-username-and-password
+		By default your raspberry pi pi comes with an account 'pi' with the password 'raspberry'. For security reasons it's probably a good idea to change the password, but you may also wish to change the username as well. There are a couple of different ways to change the default username but I found the following method the easiest. 
+		In order to change the username 'pi' we will have to log in a the root user since it's not possible to rename an account while your logged into it. To log in as root user first we have to enable it, to do so type the following command whilst logged in as the default pi user:
+			sudo passwd root
+		Choose a secure password for the root user. You can disable the root account later if you wish.
+		Now logout of the user pi using the command:
+			logout
+		And then logout back in as the user 'root' using the password you just created. Now we can rename the the default pi user name. The following method renames the user 'pi' to 'newname', replace this with whatever you want. Type the command:
+			usermod -l newname pi
+		Now the user name has been changed the user's home directory name should also be changed to
+		reflect the new login name:
+			usermod -m -d /home/newname newname
+		Now logout and login back in as newname. You can change the default password from raspberry to something more secure by typing following command and entering a new password when prompted:
+			passwd
+		If you wish you can disable the root user account again but first double check newname still has 'sudo' privileges. Check the following update command works:
+			sudo apt-get update
+		If it works then you can disable the root account by locking the password:
+			sudo passwd -l root 
+
+
+		
